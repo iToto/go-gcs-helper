@@ -49,17 +49,12 @@ func createSnapshot() {
 		os.Exit(1)
 	}
 
-	start := time.Now()
 	snapshotName := fmt.Sprintf(
 		"%s-%d",
 		os.Getenv(SNAPSHOT_BASE_NAME),
-		start.Unix(),
+		time.Now().Unix(),
 	)
-	arg1 := "beta"
-	arg2 := "compute"
 	arg3 := fmt.Sprintf("--project=%s", os.Getenv(PROJECT))
-	arg4 := "disks"
-	arg5 := "snapshot"
 	arg6 := os.Getenv(VOLUME)
 	arg7 := fmt.Sprintf("--zone=%s", os.Getenv(ZONE))
 	arg8 := fmt.Sprintf("--snapshot-names=%s", snapshotName)
@@ -67,11 +62,11 @@ func createSnapshot() {
 
 	cmd := exec.Command(
 		"gcloud",
-		arg1,
-		arg2,
+		"beta",
+		"compute",
 		arg3,
-		arg4,
-		arg5,
+		"disks",
+		"snapshot",
 		arg6,
 		arg7,
 		arg8,
